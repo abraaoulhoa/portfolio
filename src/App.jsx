@@ -2,9 +2,8 @@ import './App.css'
 import { useState, useRef, useEffect } from 'react'
 import { Github, Linkedin, Mail, ExternalLink, Code, Palette, Smartphone, Globe, Atom, Server, Cloud, Database } from 'lucide-react'
 import profileImage from './assets/profile.png'
-import projectPlaceholder from './assets/project-placeholder.png'
 import ibarberLogo from './assets/ibarber-logo.png'
-import turnixLogo from './assets/turnix-logo-chatgpt.png'
+import turnixLogo from './assets/turnix-logo-card.png'
 
 function App() {
   const [activeSection, setActiveSection] = useState('home')
@@ -62,27 +61,10 @@ function App() {
       image: turnixLogo,
       imageAlt: "Logo do Turnix",
       isLogoImage: true,
+      imageCardClassName: "bg-[#D9F1E9]",
+      imageClassName: "object-cover scale-105 brightness-105 contrast-125 saturate-110",
       status: "Em produção",
       liveUrl: "https://turnix-beta.vercel.app",
-      githubUrl: "#"
-    },
-    {
-      id: 3,
-      title: "Dashboard Analytics",
-      description: "Dashboard interativo para visualização de dados com gráficos dinâmicos e relatórios em tempo real.",
-      technologies: ["Vue.js", "D3.js", "Express", "PostgreSQL"],
-      image: projectPlaceholder,
-      status: "Em produção",
-      liveUrl: "#",
-      githubUrl: "#"
-    },
-    {
-      id: 4,
-      title: "App Mobile Fitness",
-      description: "Aplicativo mobile para acompanhamento de exercícios com integração de APIs de saúde.",
-      technologies: ["React Native", "Firebase", "Redux", "Health API"],
-      image: projectPlaceholder,
-      liveUrl: "#",
       githubUrl: "#"
     }
   ]
@@ -307,10 +289,10 @@ function App() {
               Uma seleção dos meus trabalhos mais recentes e significativos
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid max-w-[47rem] mx-auto md:grid-cols-2 gap-8">
             {projects.map((project, index) => (
               <div key={project.id} className="bg-white rounded-xl shadow-md overflow-hidden card-hover border border-gray-200 animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
-                <div className={`relative h-48 overflow-hidden ${project.isIconImage ? 'bg-gradient-to-br from-gray-950 via-[#18102c] to-[#0b6b72]' : project.isLogoImage ? 'bg-[#0f1715]' : 'bg-gray-100'}`}>
+                <div className={`relative h-48 overflow-hidden ${project.imageCardClassName || (project.isIconImage ? 'bg-gradient-to-br from-gray-950 via-[#18102c] to-[#0b6b72]' : project.isLogoImage ? 'bg-[#0f1715]' : 'bg-gray-100')}`}>
                   {project.status && (
                     <span className="absolute right-4 top-4 z-10 rounded-full border border-white/70 bg-white/90 px-3 py-1 text-xs font-bold text-[#0B6B72] shadow-md backdrop-blur-sm">
                       {project.status}
@@ -319,7 +301,7 @@ function App() {
                   <img
                     src={project.image}
                     alt={project.imageAlt || project.title}
-                    className={`w-full h-full ${project.isIconImage ? 'object-contain p-14' : 'object-cover'}`}
+                    className={`w-full h-full ${project.imageClassName || (project.isIconImage ? 'object-contain p-14' : 'object-cover')}`}
                   />
                 </div>
                 <div className="p-6">
