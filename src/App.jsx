@@ -1,6 +1,6 @@
 import './App.css'
 import { useState, useRef, useEffect } from 'react'
-import { Github, Linkedin, Mail, ExternalLink, Code, Palette, Smartphone, Globe } from 'lucide-react'
+import { Github, Linkedin, Mail, ExternalLink, Code, Palette, Smartphone, Globe, Atom, Server, Cloud, Database } from 'lucide-react'
 import profileImage from './assets/profile.png'
 import projectPlaceholder from './assets/project-placeholder.png'
 import ibarberLogo from './assets/ibarber-logo.png'
@@ -146,12 +146,50 @@ function App() {
       {/* Hero Section */}
       <section id="home" className="pt-16 min-h-screen flex items-center justify-center gradient-teal-light">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="mb-8 animate-fade-in-down">
-            <img 
-              src={profileImage} 
-              alt="Foto de perfil" 
-              className="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-white shadow-lg hover:shadow-2xl transition-shadow duration-300"
-            />
+          <div className="mb-10 animate-fade-in-down">
+            <div className="tech-orbit-stage" aria-label="Tecnologias orbitando a foto de Abraão">
+              <span className="orbit-ring orbit-ring-primary"></span>
+              <span className="orbit-ring orbit-ring-secondary"></span>
+              <div className="orbit-center">
+                <img
+                  src={profileImage}
+                  alt="Foto de perfil"
+                  className="orbit-profile-image"
+                />
+              </div>
+              <div className="orbit-path orbit-path-react" style={{ '--start-angle': '-90deg', '--face-start': '90deg', '--orbit-duration': '18s' }}>
+                <div className="tech-orbit-card">
+                  <div className="tech-orbit-face">
+                    <Atom size={18} />
+                    <span>React</span>
+                  </div>
+                </div>
+              </div>
+              <div className="orbit-path orbit-path-node" style={{ '--start-angle': '180deg', '--face-start': '-180deg', '--orbit-duration': '18s' }}>
+                <div className="tech-orbit-card">
+                  <div className="tech-orbit-face">
+                    <Server size={18} />
+                    <span>Node</span>
+                  </div>
+                </div>
+              </div>
+              <div className="orbit-path orbit-path-aws" style={{ '--start-angle': '0deg', '--face-start': '0deg', '--orbit-duration': '18s' }}>
+                <div className="tech-orbit-card">
+                  <div className="tech-orbit-face">
+                    <Cloud size={18} />
+                    <span>AWS</span>
+                  </div>
+                </div>
+              </div>
+              <div className="orbit-path orbit-path-mongo" style={{ '--start-angle': '90deg', '--face-start': '-90deg', '--orbit-duration': '18s' }}>
+                <div className="tech-orbit-card">
+                  <div className="tech-orbit-face">
+                    <Database size={18} />
+                    <span>MongoDB</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="animate-fade-in-up animation-delay-100">
             <h1 className="text-heading-1 text-gray-900 mb-6">
