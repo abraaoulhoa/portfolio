@@ -1,11 +1,36 @@
 import './App.css'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Github, Linkedin, Mail, ExternalLink, Code, Palette, Smartphone, Globe } from 'lucide-react'
-import profilePlaceholder from './assets/profile-placeholder.png'
+import profileImage from './assets/profile.png'
 import projectPlaceholder from './assets/project-placeholder.png'
+import ibarberLogo from './assets/ibarber-logo.png'
 
 function App() {
   const [activeSection, setActiveSection] = useState('home')
+  const [skillsInView, setSkillsInView] = useState(false)
+  const skillsRef = useRef(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setSkillsInView(true)
+          observer.unobserve(entry.target)
+        }
+      },
+      { threshold: 0.1 }
+    )
+
+    if (skillsRef.current) {
+      observer.observe(skillsRef.current)
+    }
+
+    return () => {
+      if (skillsRef.current) {
+        observer.unobserve(skillsRef.current)
+      }
+    }
+  }, [])
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId)
@@ -18,11 +43,13 @@ function App() {
   const projects = [
     {
       id: 1,
-      title: "E-commerce Moderno",
-      description: "Plataforma de e-commerce responsiva com carrinho de compras, sistema de pagamento e painel administrativo.",
-      technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-      image: projectPlaceholder,
-      liveUrl: "#",
+      title: "iBarber",
+      description: "Encontre uma barbearia perto de você. Plataforma para descobrir e conectar com barbearias próximas com facilidade.",
+      technologies: ["React", "Vercel", "API Location", "UX/UI"],
+      image: ibarberLogo,
+      imageAlt: "Logo do iBarber",
+      isLogoImage: true,
+      liveUrl: "https://ibarber-ten.vercel.app",
       githubUrl: "#"
     },
     {
@@ -68,31 +95,46 @@ function App() {
             <div className="hidden md:flex space-x-8">
               <button 
                 onClick={() => scrollToSection('home')}
-                className={`text-sm font-medium transition-colors hover:text-blue-600 ${activeSection === 'home' ? 'text-blue-600' : 'text-gray-600'}`}
+                className={`text-sm font-medium transition-colors ${activeSection === 'home' ? '' : 'text-gray-600'}`}
+                style={activeSection === 'home' ? { color: '#0B6B72' } : {}}
+                onMouseEnter={(e) => e.target.style.color = '#0B6B72'}
+                onMouseLeave={(e) => e.target.style.color = activeSection === 'home' ? '#0B6B72' : '#4b5563'}
               >
                 Início
               </button>
               <button 
                 onClick={() => scrollToSection('about')}
-                className={`text-sm font-medium transition-colors hover:text-blue-600 ${activeSection === 'about' ? 'text-blue-600' : 'text-gray-600'}`}
+                className={`text-sm font-medium transition-colors ${activeSection === 'about' ? '' : 'text-gray-600'}`}
+                style={activeSection === 'about' ? { color: '#0B6B72' } : {}}
+                onMouseEnter={(e) => e.target.style.color = '#0B6B72'}
+                onMouseLeave={(e) => e.target.style.color = activeSection === 'about' ? '#0B6B72' : '#4b5563'}
               >
                 Sobre
               </button>
               <button 
                 onClick={() => scrollToSection('projects')}
-                className={`text-sm font-medium transition-colors hover:text-blue-600 ${activeSection === 'projects' ? 'text-blue-600' : 'text-gray-600'}`}
+                className={`text-sm font-medium transition-colors ${activeSection === 'projects' ? '' : 'text-gray-600'}`}
+                style={activeSection === 'projects' ? { color: '#0B6B72' } : {}}
+                onMouseEnter={(e) => e.target.style.color = '#0B6B72'}
+                onMouseLeave={(e) => e.target.style.color = activeSection === 'projects' ? '#0B6B72' : '#4b5563'}
               >
                 Projetos
               </button>
               <button 
                 onClick={() => scrollToSection('skills')}
-                className={`text-sm font-medium transition-colors hover:text-blue-600 ${activeSection === 'skills' ? 'text-blue-600' : 'text-gray-600'}`}
+                className={`text-sm font-medium transition-colors ${activeSection === 'skills' ? '' : 'text-gray-600'}`}
+                style={activeSection === 'skills' ? { color: '#0B6B72' } : {}}
+                onMouseEnter={(e) => e.target.style.color = '#0B6B72'}
+                onMouseLeave={(e) => e.target.style.color = activeSection === 'skills' ? '#0B6B72' : '#4b5563'}
               >
                 Habilidades
               </button>
               <button 
                 onClick={() => scrollToSection('contact')}
-                className={`text-sm font-medium transition-colors hover:text-blue-600 ${activeSection === 'contact' ? 'text-blue-600' : 'text-gray-600'}`}
+                className={`text-sm font-medium transition-colors ${activeSection === 'contact' ? '' : 'text-gray-600'}`}
+                style={activeSection === 'contact' ? { color: '#0B6B72' } : {}}
+                onMouseEnter={(e) => e.target.style.color = '#0B6B72'}
+                onMouseLeave={(e) => e.target.style.color = activeSection === 'contact' ? '#0B6B72' : '#4b5563'}
               >
                 Contato
               </button>
@@ -102,33 +144,41 @@ function App() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="pt-16 min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-white">
+      <section id="home" className="pt-16 min-h-screen flex items-center justify-center gradient-teal-light">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="mb-8">
+          <div className="mb-8 animate-fade-in-down">
             <img 
-              src={profilePlaceholder} 
+              src={profileImage} 
               alt="Foto de perfil" 
-              className="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-white shadow-lg"
+              className="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-white shadow-lg hover:shadow-2xl transition-shadow duration-300"
             />
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-            Olá, eu sou
-            <span className="block text-blue-600">Abraão Ulhoa</span>
-          </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Apaixonado por criar experiências digitais incríveis e interfaces de usuário intuitivas. 
-            Especializado em tecnologias modernas e design responsivo.
-          </p>
-          <div className="flex justify-center space-x-4">
+          <div className="animate-fade-in-up animation-delay-100">
+            <h1 className="text-heading-1 text-gray-900 mb-6">
+              Olá, eu sou
+              <span className="block" style={{ color: '#0B6B72' }}>Abraão Ulhoa</span>
+            </h1>
+            <p className="text-body-large text-gray-600 mb-8 max-w-2xl mx-auto">
+              Apaixonado por criar experiências digitais incríveis e interfaces de usuário intuitivas. 
+              Especializado em tecnologias modernas e design responsivo.
+            </p>
+          </div>
+          <div className="flex justify-center space-x-4 animate-fade-in-up animation-delay-200">
             <button 
               onClick={() => scrollToSection('projects')}
-              className="bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+              className="text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:shadow-lg hover:-translate-y-1"
+              style={{ backgroundColor: '#0B6B72' }}
+              onMouseEnter={(e) => e.target.style.backgroundColor = '#083D41'}
+              onMouseLeave={(e) => e.target.style.backgroundColor = '#0B6B72'}
             >
               Ver Projetos
             </button>
             <button 
               onClick={() => scrollToSection('contact')}
-              className="border border-gray-300 text-gray-700 px-8 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+              className="border-2 text-gray-700 px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+              style={{ borderColor: '#0B6B72', color: '#0B6B72' }}
+              onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(11, 107, 114, 0.1)'}
+              onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
             >
               Entre em Contato
             </button>
@@ -139,54 +189,54 @@ function App() {
       {/* About Section */}
       <section id="about" className="py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Sobre Mim</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+          <div className="text-center mb-16 animate-fade-in-up">
+            <h2 className="text-heading-2 text-gray-900 mb-4">Sobre Mim</h2>
+            <p className="text-body-large text-gray-600 max-w-2xl mx-auto">
               Desenvolvedor front-end com paixão por criar soluções digitais inovadoras
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Minha Jornada</h3>
-              <p className="text-gray-600 mb-6">
+            <div className="animate-slide-in-left animation-delay-100">
+              <h3 className="text-heading-3 text-gray-900 mb-6">Minha Jornada</h3>
+              <p className="text-body-large text-gray-600 mb-6 leading-relaxed">
                 Com mais de 3 anos de experiência em desenvolvimento front-end, tenho me dedicado a criar 
                 interfaces de usuário que combinam funcionalidade e estética. Minha paixão por tecnologia 
                 me levou a dominar as principais ferramentas e frameworks do mercado.
               </p>
-              <p className="text-gray-600 mb-6">
+              <p className="text-body-large text-gray-600 mb-6 leading-relaxed">
                 Acredito que um bom código deve ser limpo, eficiente e escalável. Sempre busco as melhores 
                 práticas de desenvolvimento e mantenho-me atualizado com as últimas tendências do setor.
               </p>
               <div className="flex space-x-4">
-                <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors">
+                <a href="#" className="text-gray-600 transition-colors p-2 rounded-lg hover:bg-gray-100" style={{ '--hover-color': '#0B6B72' }} onMouseEnter={(e) => e.currentTarget.style.color = '#0B6B72'} onMouseLeave={(e) => e.currentTarget.style.color = '#4b5563'}>
                   <Github size={24} />
                 </a>
-                <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors">
+                <a href="#" className="text-gray-600 transition-colors p-2 rounded-lg hover:bg-gray-100" style={{ '--hover-color': '#0B6B72' }} onMouseEnter={(e) => e.currentTarget.style.color = '#0B6B72'} onMouseLeave={(e) => e.currentTarget.style.color = '#4b5563'}>
                   <Linkedin size={24} />
                 </a>
-                <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors">
+                <a href="#" className="text-gray-600 transition-colors p-2 rounded-lg hover:bg-gray-100" style={{ '--hover-color': '#0B6B72' }} onMouseEnter={(e) => e.currentTarget.style.color = '#0B6B72'} onMouseLeave={(e) => e.currentTarget.style.color = '#4b5563'}>
                   <Mail size={24} />
                 </a>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-6">
-              <div className="text-center p-6 bg-gray-50 rounded-lg">
-                <Code className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+            <div className="grid grid-cols-2 gap-6 animate-slide-in-right animation-delay-200">
+              <div className="text-center p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg card-hover border border-gray-200 hover:border-teal-300">
+                <Code className="w-12 h-12 mx-auto mb-4" style={{ color: '#0B6B72' }} />
                 <h4 className="font-semibold text-gray-900 mb-2">Código Limpo</h4>
                 <p className="text-sm text-gray-600">Desenvolvimento com foco em qualidade e manutenibilidade</p>
               </div>
-              <div className="text-center p-6 bg-gray-50 rounded-lg">
-                <Palette className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+              <div className="text-center p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg card-hover border border-gray-200 hover:border-teal-300">
+                <Palette className="w-12 h-12 mx-auto mb-4" style={{ color: '#0B6B72' }} />
                 <h4 className="font-semibold text-gray-900 mb-2">Design UI/UX</h4>
                 <p className="text-sm text-gray-600">Interfaces intuitivas e experiências memoráveis</p>
               </div>
-              <div className="text-center p-6 bg-gray-50 rounded-lg">
-                <Smartphone className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+              <div className="text-center p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg card-hover border border-gray-200 hover:border-teal-300">
+                <Smartphone className="w-12 h-12 mx-auto mb-4" style={{ color: '#0B6B72' }} />
                 <h4 className="font-semibold text-gray-900 mb-2">Responsivo</h4>
                 <p className="text-sm text-gray-600">Adaptação perfeita para todos os dispositivos</p>
               </div>
-              <div className="text-center p-6 bg-gray-50 rounded-lg">
-                <Globe className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+              <div className="text-center p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg card-hover border border-gray-200 hover:border-teal-300">
+                <Globe className="w-12 h-12 mx-auto mb-4" style={{ color: '#0B6B72' }} />
                 <h4 className="font-semibold text-gray-900 mb-2">Performance</h4>
                 <p className="text-sm text-gray-600">Otimização para velocidade e SEO</p>
               </div>
@@ -196,30 +246,33 @@ function App() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20 bg-gray-50">
+      <section id="projects" className="py-20 gradient-teal-light">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Meus Projetos</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+          <div className="text-center mb-16 animate-fade-in-up">
+            <h2 className="text-heading-2 text-gray-900 mb-4">Meus Projetos</h2>
+            <p className="text-body-large text-gray-600 max-w-2xl mx-auto">
               Uma seleção dos meus trabalhos mais recentes e significativos
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project) => (
-              <div key={project.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="w-full h-48 object-cover"
-                />
+            {projects.map((project, index) => (
+              <div key={project.id} className="bg-white rounded-xl shadow-md overflow-hidden card-hover border border-gray-200 animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
+                <div className={`h-48 overflow-hidden ${project.isLogoImage ? 'bg-[#0f1715]' : 'bg-gray-100'}`}>
+                  <img
+                    src={project.image}
+                    alt={project.imageAlt || project.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{project.title}</h3>
-                  <p className="text-gray-600 mb-4">{project.description}</p>
+                  <h3 className="text-heading-3 text-gray-900 mb-3">{project.title}</h3>
+                  <p className="text-gray-600 mb-4 leading-relaxed">{project.description}</p>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.technologies.map((tech, index) => (
                       <span 
                         key={index}
-                        className="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full"
+                        className="badge-tech"
+                        style={{ backgroundColor: '#D4EFEB', color: '#063839' }}
                       >
                         {tech}
                       </span>
@@ -228,14 +281,17 @@ function App() {
                   <div className="flex space-x-4">
                     <a 
                       href={project.liveUrl}
-                      className="flex items-center text-blue-600 hover:text-blue-800 transition-colors"
+                      className="flex items-center transition-colors font-medium"
+                      style={{ color: '#0B6B72' }}
+                      onMouseEnter={(e) => e.currentTarget.style.color = '#063839'}
+                      onMouseLeave={(e) => e.currentTarget.style.color = '#0B6B72'}
                     >
                       <ExternalLink size={16} className="mr-1" />
                       Ver Projeto
                     </a>
                     <a 
                       href={project.githubUrl}
-                      className="flex items-center text-gray-600 hover:text-gray-800 transition-colors"
+                      className="flex items-center text-gray-600 hover:text-gray-800 transition-colors font-medium"
                     >
                       <Github size={16} className="mr-1" />
                       Código
@@ -249,25 +305,30 @@ function App() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-20 bg-white">
+      <section id="skills" className="py-20 bg-white" ref={skillsRef}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Habilidades</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+          <div className="text-center mb-16 animate-fade-in-up">
+            <h2 className="text-heading-2 text-gray-900 mb-4">Habilidades</h2>
+            <p className="text-body-large text-gray-600 max-w-2xl mx-auto">
               Tecnologias e ferramentas que domino para criar soluções completas
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
             {skills.map((skill, index) => (
-              <div key={index} className="mb-6">
-                <div className="flex justify-between mb-2">
-                  <span className="text-gray-900 font-medium">{skill.name}</span>
-                  <span className="text-gray-600">{skill.level}%</span>
+              <div key={index} className="mb-8 animate-fade-in-up" style={{ animationDelay: `${index * 0.05}s` }}>
+                <div className="flex justify-between mb-3">
+                  <span className="text-gray-900 font-semibold text-lg">{skill.name}</span>
+                  <span className="text-gray-600 font-medium">{skill.level}%</span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden shadow-sm">
                   <div 
-                    className="bg-blue-600 h-2 rounded-full transition-all duration-1000 ease-out"
-                    style={{ width: `${skill.level}%` }}
+                    className="h-3 rounded-full transition-all ease-out"
+                    style={{ 
+                      width: skillsInView ? `${skill.level}%` : '0%', 
+                      backgroundColor: '#0B6B72',
+                      transitionDuration: skillsInView ? '2s' : '0s',
+                      transitionDelay: skillsInView ? `${index * 0.1}s` : '0s'
+                    }}
                   ></div>
                 </div>
               </div>
@@ -277,74 +338,77 @@ function App() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-gray-50">
+      <section id="contact" className="py-20 gradient-teal-light">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Entre em Contato</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+          <div className="text-center mb-16 animate-fade-in-up">
+            <h2 className="text-heading-2 text-gray-900 mb-4">Entre em Contato</h2>
+            <p className="text-body-large text-gray-600 max-w-2xl mx-auto">
               Vamos conversar sobre seu próximo projeto ou oportunidade de trabalho
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-12">
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Vamos trabalhar juntos!</h3>
-              <p className="text-gray-600 mb-8">
+            <div className="animate-slide-in-left animation-delay-100">
+              <h3 className="text-heading-3 text-gray-900 mb-6">Vamos trabalhar juntos!</h3>
+              <p className="text-body-large text-gray-600 mb-8 leading-relaxed">
                 Estou sempre interessado em novos desafios e oportunidades. 
                 Se você tem um projeto em mente ou quer apenas conversar sobre tecnologia, 
                 não hesite em entrar em contato.
               </p>
               <div className="space-y-4">
-                <div className="flex items-center">
-                  <Mail className="w-5 h-5 text-blue-600 mr-3" />
+                <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                  <Mail className="w-5 h-5 mr-3" style={{ color: '#0B6B72' }} />
                   <span className="text-gray-600">contato@exemplo.com</span>
                 </div>
-                <div className="flex items-center">
-                  <Linkedin className="w-5 h-5 text-blue-600 mr-3" />
+                <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                  <Linkedin className="w-5 h-5 mr-3" style={{ color: '#0B6B72' }} />
                   <span className="text-gray-600">linkedin.com/in/exemplo</span>
                 </div>
-                <div className="flex items-center">
-                  <Github className="w-5 h-5 text-blue-600 mr-3" />
+                <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                  <Github className="w-5 h-5 mr-3" style={{ color: '#0B6B72' }} />
                   <span className="text-gray-600">github.com/exemplo</span>
                 </div>
               </div>
             </div>
-            <form className="space-y-6">
+            <form className="space-y-6 animate-slide-in-right animation-delay-200">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
                   Nome
                 </label>
                 <input 
                   type="text" 
                   id="name"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none transition-colors"
                   placeholder="Seu nome"
                 />
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
                   Email
                 </label>
                 <input 
                   type="email" 
                   id="email"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none transition-colors"
                   placeholder="seu@email.com"
                 />
               </div>
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
                   Mensagem
                 </label>
                 <textarea 
                   id="message"
                   rows={5}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none transition-colors"
                   placeholder="Sua mensagem..."
                 ></textarea>
               </div>
               <button 
                 type="submit"
-                className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+                className="w-full text-white py-3 rounded-lg font-semibold transition-all duration-300 transform hover:shadow-lg hover:-translate-y-1"
+                style={{ backgroundColor: '#0B6B72' }}
+                onMouseEnter={(e) => e.target.style.backgroundColor = '#083D41'}
+                onMouseLeave={(e) => e.target.style.backgroundColor = '#0B6B72'}
               >
                 Enviar Mensagem
               </button>

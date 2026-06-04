@@ -3,6 +3,145 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Animações customizadas */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@layer components {
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in-down {
+    animation: fadeInDown 0.6s ease-out forwards;
+  }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 0.6s ease-out forwards;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.6s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.6s ease-out forwards;
+  }
+
+  /* Delay utilities */
+  .animation-delay-100 {
+    animation-delay: 0.1s;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 0.2s;
+  }
+
+  .animation-delay-300 {
+    animation-delay: 0.3s;
+  }
+
+  .animation-delay-400 {
+    animation-delay: 0.4s;
+  }
+
+  /* Gradientes */
+  .gradient-teal {
+    background: linear-gradient(135deg, #0B6B72 0%, #083D41 100%);
+  }
+
+  .gradient-teal-light {
+    background: linear-gradient(135deg, rgba(11, 107, 114, 0.1) 0%, rgba(8, 61, 65, 0.05) 100%);
+  }
+
+  /* Cards com destaque */
+  .card-hover {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .card-hover:hover {
+    @apply shadow-2xl -translate-y-1;
+  }
+
+  /* Tipografia melhorada */
+  .text-heading-1 {
+    @apply text-5xl md:text-7xl font-bold tracking-tight;
+  }
+
+  .text-heading-2 {
+    @apply text-4xl md:text-5xl font-bold tracking-tight;
+  }
+
+  .text-heading-3 {
+    @apply text-2xl md:text-3xl font-semibold tracking-normal;
+  }
+
+  .text-body-large {
+    @apply text-lg leading-relaxed;
+  }
+
+  /* Badge styles */
+  .badge-tech {
+    @apply px-4 py-2 rounded-full font-medium text-sm transition-all duration-300;
+  }
+
+  .badge-tech:hover {
+    @apply shadow-lg -translate-y-0.5;
+  }
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
