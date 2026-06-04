@@ -144,8 +144,8 @@ function App() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="hero-section pt-16 min-h-screen flex items-center justify-center gradient-teal-light">
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section id="home" className="pt-16 min-h-screen flex items-center justify-center gradient-teal-light">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="mb-8 animate-fade-in-down">
             <img 
               src={profileImage} 
@@ -153,35 +153,11 @@ function App() {
               className="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-white shadow-lg hover:shadow-2xl transition-shadow duration-300"
             />
           </div>
-          <div className="hero-copy animate-fade-in-up animation-delay-100">
-            <div className="hero-title-stage">
-              <h1 className="text-heading-1 text-gray-900 mb-6">
-                Olá, eu sou
-                <span className="hero-name block" style={{ color: '#0B6B72' }}>
-                  Abraão <span className="ulhoa-target">Ulhoa</span>
-                </span>
-              </h1>
-              <div className="dog-prank" aria-hidden="true">
-                <div className="pee-stream">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
-                <div className="cartoon-dog">
-                  <span className="dog-tail"></span>
-                  <span className="dog-body"></span>
-                  <span className="dog-head"></span>
-                  <span className="dog-ear"></span>
-                  <span className="dog-muzzle"></span>
-                  <span className="dog-eye"></span>
-                  <span className="dog-leg dog-leg-front"></span>
-                  <span className="dog-leg dog-leg-back"></span>
-                  <span className="dog-leg dog-leg-lifted"></span>
-                </div>
-              </div>
-            </div>
+          <div className="animate-fade-in-up animation-delay-100">
+            <h1 className="text-heading-1 text-gray-900 mb-6">
+              Olá, eu sou
+              <span className="block" style={{ color: '#0B6B72' }}>Abraão Ulhoa</span>
+            </h1>
             <p className="text-body-large text-gray-600 mb-8 max-w-2xl mx-auto">
               Apaixonado por criar experiências digitais incríveis e interfaces de usuário intuitivas. 
               Especializado em tecnologias modernas e design responsivo.
