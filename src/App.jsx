@@ -154,13 +154,13 @@ function App() {
       <section id="home" className="pt-16 min-h-screen flex items-center justify-center gradient-teal-light">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="mb-10 animate-fade-in-down">
-            <div className="tech-orbit-stage" aria-label="Tecnologias orbitando a foto de Abraão Ulhoa de Freitas">
+            <div className="tech-orbit-stage" aria-label="Tecnologias orbitando a foto de Abraão Ulhoa">
               <span className="orbit-ring orbit-ring-primary"></span>
               <span className="orbit-ring orbit-ring-secondary"></span>
               <div className="orbit-center">
                 <img
                   src={profileImage}
-                  alt="Foto de perfil de Abraão Ulhoa de Freitas"
+                  alt="Foto de perfil de Abraão Ulhoa"
                   className="orbit-profile-image"
                 />
               </div>
@@ -201,7 +201,7 @@ function App() {
           <div className="animate-fade-in-up animation-delay-100">
             <h1 className="text-heading-1 text-gray-900 mb-6">
               Olá, eu sou
-              <span className="block" style={{ color: '#0B6B72' }}>Abraão Ulhoa de Freitas</span>
+              <span className="block" style={{ color: '#0B6B72' }}>Abraão Ulhoa</span>
             </h1>
             <p className="text-body-large text-gray-600 mb-8 max-w-2xl mx-auto">
               Desenvolvedor Front-End com experiência em React, JavaScript, Node.js e criação de interfaces modernas.
@@ -259,13 +259,13 @@ function App() {
                 resultados.
               </p>
               <div className="flex space-x-4">
-                <a href={contact.github} target="_blank" rel="noreferrer" aria-label="GitHub de Abraão Ulhoa de Freitas" className="text-gray-600 transition-colors p-2 rounded-lg hover:bg-gray-100" style={{ '--hover-color': '#0B6B72' }} onMouseEnter={(e) => e.currentTarget.style.color = '#0B6B72'} onMouseLeave={(e) => e.currentTarget.style.color = '#4b5563'}>
+                <a href={contact.github} target="_blank" rel="noreferrer" aria-label="GitHub de Abraão Ulhoa" className="text-gray-600 transition-colors p-2 rounded-lg hover:bg-gray-100" style={{ '--hover-color': '#0B6B72' }} onMouseEnter={(e) => e.currentTarget.style.color = '#0B6B72'} onMouseLeave={(e) => e.currentTarget.style.color = '#4b5563'}>
                   <Github size={24} />
                 </a>
-                <a href={contact.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn de Abraão Ulhoa de Freitas" className="text-gray-600 transition-colors p-2 rounded-lg hover:bg-gray-100" style={{ '--hover-color': '#0B6B72' }} onMouseEnter={(e) => e.currentTarget.style.color = '#0B6B72'} onMouseLeave={(e) => e.currentTarget.style.color = '#4b5563'}>
+                <a href={contact.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn de Abraão Ulhoa" className="text-gray-600 transition-colors p-2 rounded-lg hover:bg-gray-100" style={{ '--hover-color': '#0B6B72' }} onMouseEnter={(e) => e.currentTarget.style.color = '#0B6B72'} onMouseLeave={(e) => e.currentTarget.style.color = '#4b5563'}>
                   <Linkedin size={24} />
                 </a>
-                <a href={`mailto:${contact.email}`} aria-label="Enviar email para Abraão Ulhoa de Freitas" className="text-gray-600 transition-colors p-2 rounded-lg hover:bg-gray-100" style={{ '--hover-color': '#0B6B72' }} onMouseEnter={(e) => e.currentTarget.style.color = '#0B6B72'} onMouseLeave={(e) => e.currentTarget.style.color = '#4b5563'}>
+                <a href={`mailto:${contact.email}`} aria-label="Enviar email para Abraão Ulhoa" className="text-gray-600 transition-colors p-2 rounded-lg hover:bg-gray-100" style={{ '--hover-color': '#0B6B72' }} onMouseEnter={(e) => e.currentTarget.style.color = '#0B6B72'} onMouseLeave={(e) => e.currentTarget.style.color = '#4b5563'}>
                   <Mail size={24} />
                 </a>
               </div>
@@ -476,7 +476,7 @@ function App() {
       <footer className="bg-gray-900 text-white py-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-gray-400">
-            © 2026 Portfólio de Abraão Ulhoa de Freitas. Todos os direitos reservados.
+            © 2026 Portfólio de Abraão Ulhoa. Todos os direitos reservados.
           </p>
         </div>
       </footer>
