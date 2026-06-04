@@ -1,6 +1,6 @@
 import './App.css'
 import { useState, useRef, useEffect } from 'react'
-import { Github, Linkedin, Mail, ExternalLink, Code, Palette, Smartphone, Globe, Atom, Server, Cloud, Database } from 'lucide-react'
+import { Github, Linkedin, Mail, ExternalLink, Code, Palette, Wrench, Zap, Atom, Server, Cloud, Database } from 'lucide-react'
 import profileImage from './assets/profile.png'
 import ibarberLogo from './assets/ibarber-logo.png'
 import turnixLogo from './assets/turnix-logo-card.png'
@@ -21,13 +21,15 @@ function App() {
       { threshold: 0.1 }
     )
 
-    if (skillsRef.current) {
-      observer.observe(skillsRef.current)
+    const currentSkillsRef = skillsRef.current
+
+    if (currentSkillsRef) {
+      observer.observe(currentSkillsRef)
     }
 
     return () => {
-      if (skillsRef.current) {
-        observer.unobserve(skillsRef.current)
+      if (currentSkillsRef) {
+        observer.unobserve(currentSkillsRef)
       }
     }
   }, [])
@@ -38,6 +40,14 @@ function App() {
       element.scrollIntoView({ behavior: 'smooth' })
       setActiveSection(sectionId)
     }
+  }
+
+  const contact = {
+    email: 'abraaoulhoa@gmail.com',
+    linkedin: 'https://www.linkedin.com/in/abraaoulhoa',
+    linkedinLabel: 'linkedin.com/in/abraaoulhoa',
+    github: 'https://github.com/abraaoulhoa',
+    githubLabel: 'github.com/abraaoulhoa'
   }
 
   const projects = [
@@ -51,7 +61,7 @@ function App() {
       isLogoImage: true,
       status: "Em produção",
       liveUrl: "https://ibarber-ten.vercel.app",
-      githubUrl: "#"
+      githubUrl: "https://github.com/abraaoulhoa/iBarber.git"
     },
     {
       id: 2,
@@ -65,19 +75,19 @@ function App() {
       imageClassName: "object-cover scale-105 brightness-105 contrast-125 saturate-110",
       status: "Em produção",
       liveUrl: "https://turnix-beta.vercel.app",
-      githubUrl: "#"
+      githubUrl: "https://github.com/abraaoulhoa/turnix.git"
     }
   ]
 
   const skills = [
-    { name: "MongoDB", level: 80 },
-    { name: "AWS", level: 75 },
-    { name: "JavaScript", level: 88 },
-    { name: "React", level: 85 },
-    { name: "Vue.js", level: 80 },
-    { name: "Node.js", level: 75 },
-    { name: "TypeScript", level: 70 },
-    { name: "Git", level: 85 }
+    { name: "React", level: 88 },
+    { name: "JavaScript", level: 86 },
+    { name: "Node.js", level: 78 },
+    { name: "HTML & CSS", level: 90 },
+    { name: "Git", level: 82 },
+    { name: "Bancos de Dados", level: 72 },
+    { name: "Assistência Técnica", level: 88 },
+    { name: "Eletrotécnica", level: 80 }
   ]
 
   return (
@@ -144,13 +154,13 @@ function App() {
       <section id="home" className="pt-16 min-h-screen flex items-center justify-center gradient-teal-light">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="mb-10 animate-fade-in-down">
-            <div className="tech-orbit-stage" aria-label="Tecnologias orbitando a foto de Abraão">
+            <div className="tech-orbit-stage" aria-label="Tecnologias orbitando a foto de Abraão Ulhoa de Freitas">
               <span className="orbit-ring orbit-ring-primary"></span>
               <span className="orbit-ring orbit-ring-secondary"></span>
               <div className="orbit-center">
                 <img
                   src={profileImage}
-                  alt="Foto de perfil"
+                  alt="Foto de perfil de Abraão Ulhoa de Freitas"
                   className="orbit-profile-image"
                 />
               </div>
@@ -191,11 +201,11 @@ function App() {
           <div className="animate-fade-in-up animation-delay-100">
             <h1 className="text-heading-1 text-gray-900 mb-6">
               Olá, eu sou
-              <span className="block" style={{ color: '#0B6B72' }}>Abraão Ulhoa</span>
+              <span className="block" style={{ color: '#0B6B72' }}>Abraão Ulhoa de Freitas</span>
             </h1>
             <p className="text-body-large text-gray-600 mb-8 max-w-2xl mx-auto">
-              Apaixonado por criar experiências digitais incríveis e interfaces de usuário intuitivas. 
-              Especializado em tecnologias modernas e design responsivo.
+              Desenvolvedor Front-End com experiência em React, JavaScript, Node.js e criação de interfaces modernas.
+              Técnico em Eletrotécnica e profissional de Assistência Técnica, unindo software, hardware e resolução de problemas.
             </p>
           </div>
           <div className="flex justify-center space-x-4 animate-fade-in-up animation-delay-200">
@@ -227,29 +237,35 @@ function App() {
           <div className="text-center mb-16 animate-fade-in-up">
             <h2 className="text-heading-2 text-gray-900 mb-4">Sobre Mim</h2>
             <p className="text-body-large text-gray-600 max-w-2xl mx-auto">
-              Desenvolvedor front-end com paixão por criar soluções digitais inovadoras
+              Desenvolvedor Front-End & Técnico em Eletrotécnica, unindo software, hardware e resolução de problemas
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="animate-slide-in-left animation-delay-100">
               <h3 className="text-heading-3 text-gray-900 mb-6">Minha Jornada</h3>
               <p className="text-body-large text-gray-600 mb-6 leading-relaxed">
-                Com mais de 3 anos de experiência em desenvolvimento front-end, tenho me dedicado a criar 
-                interfaces de usuário que combinam funcionalidade e estética. Minha paixão por tecnologia 
-                me levou a dominar as principais ferramentas e frameworks do mercado.
+                Sou um profissional apaixonado por tecnologia, com formação em Eletrotécnica e experiência nas áreas de
+                assistência técnica e desenvolvimento de software. Atualmente atuo com diagnóstico e reparo de equipamentos
+                eletrônicos, enquanto aprimoro continuamente minhas habilidades em desenvolvimento web utilizando tecnologias
+                como React, JavaScript, Node.js e bancos de dados.
               </p>
               <p className="text-body-large text-gray-600 mb-6 leading-relaxed">
-                Acredito que um bom código deve ser limpo, eficiente e escalável. Sempre busco as melhores 
-                práticas de desenvolvimento e mantenho-me atualizado com as últimas tendências do setor.
+                Tenho perfil proativo, gosto de resolver problemas, aprender novas tecnologias e transformar ideias em
+                soluções práticas. Busco oportunidades que me permitam crescer profissionalmente, contribuir com projetos
+                inovadores e unir minha experiência técnica em hardware com o desenvolvimento de software.
+              </p>
+              <p className="text-body-large text-gray-600 mb-6 leading-relaxed">
+                Acredito que dedicação, aprendizado contínuo e trabalho em equipe são fundamentais para alcançar grandes
+                resultados.
               </p>
               <div className="flex space-x-4">
-                <a href="#" className="text-gray-600 transition-colors p-2 rounded-lg hover:bg-gray-100" style={{ '--hover-color': '#0B6B72' }} onMouseEnter={(e) => e.currentTarget.style.color = '#0B6B72'} onMouseLeave={(e) => e.currentTarget.style.color = '#4b5563'}>
+                <a href={contact.github} target="_blank" rel="noreferrer" aria-label="GitHub de Abraão Ulhoa de Freitas" className="text-gray-600 transition-colors p-2 rounded-lg hover:bg-gray-100" style={{ '--hover-color': '#0B6B72' }} onMouseEnter={(e) => e.currentTarget.style.color = '#0B6B72'} onMouseLeave={(e) => e.currentTarget.style.color = '#4b5563'}>
                   <Github size={24} />
                 </a>
-                <a href="#" className="text-gray-600 transition-colors p-2 rounded-lg hover:bg-gray-100" style={{ '--hover-color': '#0B6B72' }} onMouseEnter={(e) => e.currentTarget.style.color = '#0B6B72'} onMouseLeave={(e) => e.currentTarget.style.color = '#4b5563'}>
+                <a href={contact.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn de Abraão Ulhoa de Freitas" className="text-gray-600 transition-colors p-2 rounded-lg hover:bg-gray-100" style={{ '--hover-color': '#0B6B72' }} onMouseEnter={(e) => e.currentTarget.style.color = '#0B6B72'} onMouseLeave={(e) => e.currentTarget.style.color = '#4b5563'}>
                   <Linkedin size={24} />
                 </a>
-                <a href="#" className="text-gray-600 transition-colors p-2 rounded-lg hover:bg-gray-100" style={{ '--hover-color': '#0B6B72' }} onMouseEnter={(e) => e.currentTarget.style.color = '#0B6B72'} onMouseLeave={(e) => e.currentTarget.style.color = '#4b5563'}>
+                <a href={`mailto:${contact.email}`} aria-label="Enviar email para Abraão Ulhoa de Freitas" className="text-gray-600 transition-colors p-2 rounded-lg hover:bg-gray-100" style={{ '--hover-color': '#0B6B72' }} onMouseEnter={(e) => e.currentTarget.style.color = '#0B6B72'} onMouseLeave={(e) => e.currentTarget.style.color = '#4b5563'}>
                   <Mail size={24} />
                 </a>
               </div>
@@ -262,18 +278,18 @@ function App() {
               </div>
               <div className="text-center p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg card-hover border border-gray-200 hover:border-teal-300">
                 <Palette className="w-12 h-12 mx-auto mb-4" style={{ color: '#0B6B72' }} />
-                <h4 className="font-semibold text-gray-900 mb-2">Design UI/UX</h4>
-                <p className="text-sm text-gray-600">Interfaces intuitivas e experiências memoráveis</p>
+                <h4 className="font-semibold text-gray-900 mb-2">Interfaces Modernas</h4>
+                <p className="text-sm text-gray-600">Experiências responsivas, intuitivas e bem estruturadas</p>
               </div>
               <div className="text-center p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg card-hover border border-gray-200 hover:border-teal-300">
-                <Smartphone className="w-12 h-12 mx-auto mb-4" style={{ color: '#0B6B72' }} />
-                <h4 className="font-semibold text-gray-900 mb-2">Responsivo</h4>
-                <p className="text-sm text-gray-600">Adaptação perfeita para todos os dispositivos</p>
+                <Wrench className="w-12 h-12 mx-auto mb-4" style={{ color: '#0B6B72' }} />
+                <h4 className="font-semibold text-gray-900 mb-2">Assistência Técnica</h4>
+                <p className="text-sm text-gray-600">Diagnóstico e reparo de equipamentos eletrônicos</p>
               </div>
               <div className="text-center p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg card-hover border border-gray-200 hover:border-teal-300">
-                <Globe className="w-12 h-12 mx-auto mb-4" style={{ color: '#0B6B72' }} />
-                <h4 className="font-semibold text-gray-900 mb-2">Performance</h4>
-                <p className="text-sm text-gray-600">Otimização para velocidade e SEO</p>
+                <Zap className="w-12 h-12 mx-auto mb-4" style={{ color: '#0B6B72' }} />
+                <h4 className="font-semibold text-gray-900 mb-2">Eletrotécnica</h4>
+                <p className="text-sm text-gray-600">Base técnica para unir hardware, sistemas e soluções práticas</p>
               </div>
             </div>
           </div>
@@ -350,7 +366,7 @@ function App() {
           <div className="text-center mb-16 animate-fade-in-up">
             <h2 className="text-heading-2 text-gray-900 mb-4">Habilidades</h2>
             <p className="text-body-large text-gray-600 max-w-2xl mx-auto">
-              Tecnologias e ferramentas que domino para criar soluções completas
+              Tecnologias e competências que utilizo para criar soluções completas
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
@@ -383,30 +399,29 @@ function App() {
           <div className="text-center mb-16 animate-fade-in-up">
             <h2 className="text-heading-2 text-gray-900 mb-4">Entre em Contato</h2>
             <p className="text-body-large text-gray-600 max-w-2xl mx-auto">
-              Vamos conversar sobre seu próximo projeto ou oportunidade de trabalho
+              Vamos conversar sobre projetos, oportunidades ou soluções que conectem tecnologia e prática
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-12">
             <div className="animate-slide-in-left animation-delay-100">
               <h3 className="text-heading-3 text-gray-900 mb-6">Vamos trabalhar juntos!</h3>
               <p className="text-body-large text-gray-600 mb-8 leading-relaxed">
-                Estou sempre interessado em novos desafios e oportunidades. 
-                Se você tem um projeto em mente ou quer apenas conversar sobre tecnologia, 
-                não hesite em entrar em contato.
+                Estou sempre aberto a novos desafios e oportunidades. Se você tem um projeto em mente,
+                uma oportunidade profissional ou quer conversar sobre tecnologia, entre em contato.
               </p>
               <div className="space-y-4">
-                <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                <a href={`mailto:${contact.email}`} className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
                   <Mail className="w-5 h-5 mr-3" style={{ color: '#0B6B72' }} />
-                  <span className="text-gray-600">contato@exemplo.com</span>
-                </div>
-                <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                  <span className="text-gray-600">{contact.email}</span>
+                </a>
+                <a href={contact.linkedin} target="_blank" rel="noreferrer" className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
                   <Linkedin className="w-5 h-5 mr-3" style={{ color: '#0B6B72' }} />
-                  <span className="text-gray-600">linkedin.com/in/exemplo</span>
-                </div>
-                <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                  <span className="text-gray-600">{contact.linkedinLabel}</span>
+                </a>
+                <a href={contact.github} target="_blank" rel="noreferrer" className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
                   <Github className="w-5 h-5 mr-3" style={{ color: '#0B6B72' }} />
-                  <span className="text-gray-600">github.com/exemplo</span>
-                </div>
+                  <span className="text-gray-600">{contact.githubLabel}</span>
+                </a>
               </div>
             </div>
             <form className="space-y-6 animate-slide-in-right animation-delay-200">
@@ -461,7 +476,7 @@ function App() {
       <footer className="bg-gray-900 text-white py-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-gray-400">
-            © 2025 Portfólio de Abraão Ulhoa. Todos os direitos reservados.
+            © 2026 Portfólio de Abraão Ulhoa de Freitas. Todos os direitos reservados.
           </p>
         </div>
       </footer>
