@@ -4,6 +4,7 @@ import { Github, Linkedin, Mail, ExternalLink, Code, Palette, Smartphone, Globe,
 import profileImage from './assets/profile.png'
 import projectPlaceholder from './assets/project-placeholder.png'
 import ibarberLogo from './assets/ibarber-logo.png'
+import turnixLogo from './assets/turnix-logo-chatgpt.png'
 
 function App() {
   const [activeSection, setActiveSection] = useState('home')
@@ -49,20 +50,34 @@ function App() {
       image: ibarberLogo,
       imageAlt: "Logo do iBarber",
       isLogoImage: true,
+      status: "Em produção",
       liveUrl: "https://ibarber-ten.vercel.app",
       githubUrl: "#"
     },
     {
       id: 2,
-      title: "Dashboard Analytics",
-      description: "Dashboard interativo para visualização de dados com gráficos dinâmicos e relatórios em tempo real.",
-      technologies: ["Vue.js", "D3.js", "Express", "PostgreSQL"],
-      image: projectPlaceholder,
-      liveUrl: "#",
+      title: "Turnix",
+      description: "Relatório de turnos automatizados. Gere relatórios de turno em segundos com dados de operação, escala, equipamentos e envio rápido.",
+      technologies: ["React", "Vercel", "LocalStorage", "UX/UI"],
+      image: turnixLogo,
+      imageAlt: "Logo do Turnix",
+      isLogoImage: true,
+      status: "Em produção",
+      liveUrl: "https://turnix-beta.vercel.app",
       githubUrl: "#"
     },
     {
       id: 3,
+      title: "Dashboard Analytics",
+      description: "Dashboard interativo para visualização de dados com gráficos dinâmicos e relatórios em tempo real.",
+      technologies: ["Vue.js", "D3.js", "Express", "PostgreSQL"],
+      image: projectPlaceholder,
+      status: "Em produção",
+      liveUrl: "#",
+      githubUrl: "#"
+    },
+    {
+      id: 4,
       title: "App Mobile Fitness",
       description: "Aplicativo mobile para acompanhamento de exercícios com integração de APIs de saúde.",
       technologies: ["React Native", "Firebase", "Redux", "Health API"],
@@ -73,8 +88,8 @@ function App() {
   ]
 
   const skills = [
-    { name: "HTML5", level: 95 },
-    { name: "CSS3", level: 90 },
+    { name: "MongoDB", level: 80 },
+    { name: "AWS", level: 75 },
     { name: "JavaScript", level: 88 },
     { name: "React", level: 85 },
     { name: "Vue.js", level: 80 },
@@ -295,11 +310,16 @@ function App() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
               <div key={project.id} className="bg-white rounded-xl shadow-md overflow-hidden card-hover border border-gray-200 animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
-                <div className={`h-48 overflow-hidden ${project.isLogoImage ? 'bg-[#0f1715]' : 'bg-gray-100'}`}>
+                <div className={`relative h-48 overflow-hidden ${project.isIconImage ? 'bg-gradient-to-br from-gray-950 via-[#18102c] to-[#0b6b72]' : project.isLogoImage ? 'bg-[#0f1715]' : 'bg-gray-100'}`}>
+                  {project.status && (
+                    <span className="absolute right-4 top-4 z-10 rounded-full border border-white/70 bg-white/90 px-3 py-1 text-xs font-bold text-[#0B6B72] shadow-md backdrop-blur-sm">
+                      {project.status}
+                    </span>
+                  )}
                   <img
                     src={project.image}
                     alt={project.imageAlt || project.title}
-                    className="w-full h-full object-cover"
+                    className={`w-full h-full ${project.isIconImage ? 'object-contain p-14' : 'object-cover'}`}
                   />
                 </div>
                 <div className="p-6">
